@@ -6,12 +6,15 @@
     <h1 class="mt-3">Voici le post</h1>
     <div class="container p-2 border border-light">
         <h3>{{ post.title }}</h3>
+        <img height="300px" src="{{ vich_uploader_asset(post.image,'imageFile') }}">
         <p>{{ post.content }}</p>
         <p><strong>le {{ post.createdAt|date('d/m/y - H:i') }} par {{ post.author.username }}</strong></p>
         <a href="{{ path('index_posts') }}" class="btn btn-light">RETOUR</a>
         {% if app.user == post.author %}
         <a href="{{ path('edit_post', {id:post.id}) }}" class="btn btn-warning">EDIT</a>
         <a href="{{ path('delete_post', {id:post.id}) }}" class="btn btn-danger">DELETE</a>
+        {% else %}
+            <a href="#" class="btn btn-success">LIKE</a>
         {% endif %}
     </div>
     <div class="container comments">
